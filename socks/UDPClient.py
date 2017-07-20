@@ -4,13 +4,15 @@
 from socket import socket, AF_INET, SOCK_DGRAM
 
 port = 3300
-name = 'HoHoHost'
+name = '192.168.7.104'
 sock = socket(AF_INET, SOCK_DGRAM)
 
-data = input('Message: ')
-sock.sendto(data, (name, port))
-mod_data, server_address = sock.recvfrom(1024)
-
-print(mod_data)
+while True:
+    data = input('Message: ')
+    udata = data.encode('utf-8')
+    sock.sendto(udata, (name, port))
+    mod_data, server_address = sock.recvfrom(1024)
+    mod_data = mod_data.decode('utf-8')
+    print(mod_data)
 
 sock.close()

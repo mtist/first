@@ -9,6 +9,8 @@ sock.bind(('', port))
 
 while True:
     data, caddress = sock.recvfrom(1024)
-    sock.sendto(data.upper(), caddress)
+    udata = data.decode("utf-8")
+    udata = udata.upper()
+    sock.sendto(udata.encode('utf-8'), caddress)
 
 
